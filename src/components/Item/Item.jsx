@@ -1,8 +1,10 @@
 import React from 'react'
 import './Item.css'
+import ModalBookInfo from '../ModalBookInfo/ModalBookInfo'
 
 export default function Item({ book, addToMyBooks }) {
   const { title, authors, imageLinks } = book.volumeInfo
+  console.log('Book object:', { id: book.id, ...book.volumeInfo })
 
   return (
     <div className="item">
@@ -14,10 +16,11 @@ export default function Item({ book, addToMyBooks }) {
         )}
         <button
           className="add-button"
-          onClick={() => addToMyBooks(book.volumeInfo)}
+          onClick={() => addToMyBooks({ id: book.id, ...book.volumeInfo })}
         >
           Add to My Books
         </button>
+        <ModalBookInfo />
       </li>
     </div>
   )
