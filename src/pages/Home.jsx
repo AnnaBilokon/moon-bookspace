@@ -3,7 +3,6 @@ import AddedBooks from '../components/AddedBooks/AddedBooks'
 import BookContextProvider from '../store/book-context.jsx'
 import Header from '../components/Header/Header.jsx'
 import ChallengeSection from '../components/ChallengeSection/ChallengeSection.jsx'
-import BookChart from '../components/BookChart/BookChart.jsx'
 import './css/home.css'
 
 export default function Home() {
@@ -11,9 +10,9 @@ export default function Home() {
     <>
       <BookContextProvider>
         <Header />
-        <div className="challenge-section-results">
+        <div>
           <ChallengeSection />
-          <BookChart />
+          {/* <BookChart /> */}
         </div>
         <AddedBooks />
       </BookContextProvider>
