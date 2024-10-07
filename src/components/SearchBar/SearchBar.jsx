@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import './SearchBar.css'
 import Item from '../Item/Item'
@@ -14,19 +14,6 @@ export default function SearchBar() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  // const debounce = (func, delay) => {
-  // let timeout;
-  // return (...args) => {
-  //   clearTimeout(timeout);
-  //   timeout = setTimeout(() => func(...args), delay);
-  // };
-  // };
-
-  // const handleSearch = debounce((e) => {
-  // e.preventDefault();
-  // fetchBooks();
-  // }, 500); // Delay of 500ms
-
   const handleSearch = (e) => {
     e.preventDefault()
     fetchBooks()
@@ -39,32 +26,12 @@ export default function SearchBar() {
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`,
       )
-
       setBooksData(response.data.items)
-      console.log(booksData, 'Fetch data')
     } catch (err) {
       setError('Failed to fetch data. Please try again.')
     }
     setLoading(false)
   }
-
-  //   const addToMyBooks = (book) => {
-  //     const existingBook = myBooks.find((b) => b.id === book.id)
-  //     if (!existingBook) {
-  //       setMyBooks([...myBooks, book])
-  //       // Optionally, save to localStorage for persistence
-  //       localStorage.setItem('myBooks', JSON.stringify([...myBooks, book]))
-  //     } else {
-  //       alert('This book is already in your collection.')
-  //     }
-  //   }
-
-  //   const removeFromMyBooks = (bookId) => {
-  //     const updatedBooks = myBooks.filter((book) => book.id !== bookId)
-  //     setMyBooks(updatedBooks)
-  //     // Update local storage
-  //     localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
-  //   }
 
   return (
     <div className="main-container">
@@ -104,8 +71,6 @@ export default function SearchBar() {
           onClose={() => setNotification('')}
         />
       )}
-
-      {/* <AddedBooks /> */}
     </div>
   )
 }
