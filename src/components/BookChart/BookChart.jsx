@@ -2,12 +2,14 @@ import React, { useContext } from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { BookContext } from '../../store/book-context'
+import './BookChart.css'
 
 // Register necessary Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function BookChart() {
-  const { myBooks } = useContext(BookContext)
+  const { myBooks, submittedValue } = useContext(BookContext)
+  console.log('SubmittedValue', submittedValue)
 
   // Count the number of books
   const bookCount = myBooks.length - 1
@@ -18,7 +20,7 @@ export default function BookChart() {
     datasets: [
       {
         label: 'Books left to read',
-        data: [bookCount, 10 - bookCount], // 100 is for full circle visualization, change this as needed
+        data: [bookCount, submittedValue - bookCount],
         backgroundColor: ['#4A539F', '#B26C96'], // Colors for doughnut
         hoverBackgroundColor: ['#1B1F24', '#FF6384'],
       },
@@ -35,10 +37,8 @@ export default function BookChart() {
   }
 
   return (
-    <div style={{ width: '270px', margin: '0 auto' }}>
-      <p
-        style={{ textAlign: 'center', color: 'white' }}
-      >{`Total Books: ${bookCount}`}</p>
+    <div className="chart-style">
+      {/* <p className="chart-title">{`${bookCount} / ${submittedValue}`}</p> */}
       <Doughnut data={data} options={options} />
     </div>
   )
