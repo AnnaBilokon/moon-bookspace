@@ -25,7 +25,7 @@ export default function Header() {
             setMenu('home')
           }}
         >
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>
             Home
           </Link>
           {menu === 'home' ? <hr /> : <></>}
@@ -35,8 +35,11 @@ export default function Header() {
             setMenu('shop')
           }}
         >
-          <Link to="/shop" style={{ textDecoration: 'none', color: 'inherit' }}>
-            Challenge
+          <Link
+            to="/search"
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            Search
           </Link>
           {menu === 'shop' ? <hr /> : <></>}
         </li>
