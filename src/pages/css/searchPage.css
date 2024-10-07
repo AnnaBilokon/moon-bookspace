@@ -4,7 +4,7 @@
 	background: url('../../images/background-image.jpeg'), rgba(27, 31, 36, 0.9);
 	background-size: contain;
 	background-position: center;
-	background-blend-mode: overlay; /* Or use "multiply", "screen", etc. */
+	background-blend-mode: overlay; 
   }
 
   
