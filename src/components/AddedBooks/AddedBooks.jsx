@@ -15,18 +15,17 @@ export default function AddedBooks() {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         top: 0,
-        left: -150, // Adjust this value to control the scroll amount
+        left: -150,
         behavior: 'smooth',
       })
     }
   }
 
-  // Function to scroll right
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         top: 0,
-        left: 150, // Adjust this value to control the scroll amount
+        left: 150,
         behavior: 'smooth',
       })
     }
@@ -50,7 +49,7 @@ export default function AddedBooks() {
             myBooks.map((book) => {
               if (!book) {
                 console.warn('Book object is null or undefined')
-                return null // Skip this entry if it's not valid
+                return null
               }
               return (
                 <div key={book.id} className="my-book-card">
@@ -76,7 +75,7 @@ export default function AddedBooks() {
               )
             })
           ) : (
-            <p>No books saved yet.</p>
+            <p className="my-book-title">No books saved yet.</p>
           )}
         </div>
         <button className="scroll-button right" onClick={scrollRight}>
