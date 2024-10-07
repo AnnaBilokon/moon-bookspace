@@ -1,41 +1,50 @@
 import React, { createContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const BookContext = createContext()
 
 export default function BookContextProvider({ children }) {
+  const navigate = useNavigate()
   const [myBooks, setMyBooks] = useState([])
   const [notification, setNotification] = useState('')
+  const [customBookChallenge, setCustomBookChallenge] = useState('')
+  const [submittedValue, setSubmittedValue] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const addToMyBooks = (book) => {
-    // if (!book || !book.id) {
-    //   console.error('Invalid book:', book)
-    //   return
-    // }
-
-    // console.log('Adding book:', book)
+    if (!book || !book.id) {
+      console.error('Invalid book or missing id:', book)
+      return null
+    }
 
     setMyBooks((prevBooks) => {
+      const isBookAlreadyAdded = prevBooks.some((b) => b.id === book.id)
+
+      if (isBookAlreadyAdded) {
+        console.warn(`Book with id ${book.id} is already in My Books.`)
+        return prevBooks
+      }
       const updatedBooks = [...prevBooks, book]
       localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
+      console.log('updated books', myBooks)
+
       return updatedBooks
     })
+
     setNotification(`Added "${book.title}" to My Books!`)
+    setIsModalOpen(true)
 
     setTimeout(() => {
       setNotification('')
     }, 3000)
-
-    // const existingBook = myBooks.find((b) => b.id === book.id)
-    // if (!existingBook) {
-    //   setMyBooks([...myBooks, book])
-    //   // Optionally, save to localStorage for persistence
-    //   localStorage.setItem('myBooks', JSON.stringify([...myBooks, book]))
-    // } else {
-    //   alert('This book is already in your collection.')
-    // }
   }
 
   const removeFromMyBooks = (bookId) => {
+    if (!bookId) {
+      console.error('No bookId provided for removal')
+      return
+    }
+
     setMyBooks((prevBooks) => {
       const updatedBooks = prevBooks.filter((book) => book.id !== bookId)
       localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
@@ -43,12 +52,32 @@ export default function BookContextProvider({ children }) {
     })
   }
 
-  //   const removeFromMyBooks = (bookId) => {
-  //     const updatedBooks = myBooks.filter((book) => book.id !== bookId)
-  //     setMyBooks(updatedBooks)
-  //     // Update local storage
-  //     localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
-  //   }
+  const handleCustomInputChange = (e) => {
+    const value = e.target.value
+    if (value === '' || (Number(value) >= 0 && Number(value) <= 500)) {
+      setCustomBookChallenge(value)
+    }
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit()
+
+      navigate('/home')
+    }
+  }
+
+  const handleSubmit = () => {
+    const valueToSubmit = customBookChallenge
+    if (valueToSubmit) {
+      setSubmittedValue(valueToSubmit)
+      localStorage.setItem('numberOfBooksChallenge', valueToSubmit)
+    }
+  }
+
+  const handleModalSubmit = (details) => {
+    console.log('Book details submitted:', details)
+  }
 
   const bookCount = myBooks.length
 
@@ -56,6 +85,13 @@ export default function BookContextProvider({ children }) {
     const savedBooks = localStorage.getItem('myBooks')
     if (savedBooks) {
       setMyBooks(JSON.parse(savedBooks))
+    }
+  }, [])
+
+  useEffect(() => {
+    const savedNumber = localStorage.getItem('numberOfBooksChallenge')
+    if (savedNumber) {
+      setSubmittedValue(savedNumber)
     }
   }, [])
 
@@ -69,6 +105,13 @@ export default function BookContextProvider({ children }) {
         notification,
         setNotification,
         bookCount,
+        handleCustomInputChange,
+        customBookChallenge,
+        handleKeyPress,
+        submittedValue,
+        setIsModalOpen,
+        handleModalSubmit,
+        isModalOpen,
       }}
     >
       {children}
