@@ -1,0 +1,21 @@
+.star-rating {
+	display: flex;
+	cursor: pointer;
+	margin-left: 16px;
+	margin-top: 8px;
+  }
+  
+  .star {
+	font-size: 2rem;
+	color: lightgray;
+	transition: color 0.3s;
+  }
+  
+  .star.filled {
+	color: gold;
+  }
+  
+  .star:hover {
+	color: orange;
+  }
+  
