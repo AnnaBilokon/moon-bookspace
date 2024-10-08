@@ -20,8 +20,8 @@ export default function Item({ book, addToMyBooks }) {
         >
           Add to My Books
         </button>
-        <ModalBookInfo />
       </li>
+      <ModalBookInfo />
     </div>
   )
 }
