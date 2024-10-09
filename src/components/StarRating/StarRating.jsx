@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './StarRating.css'
 
-export default function StarRating({ totalStars = 5, onRatingChange }) {
-  const [rating, setRating] = useState(0)
-
+export default function StarRating({
+  totalStars = 5,
+  onRatingChange,
+  userRating,
+  setUserRating,
+}) {
   const handleStarClick = (ratingValue) => {
-    setRating(ratingValue) // Update the local rating state
+    setUserRating(ratingValue)
     if (onRatingChange) {
-      onRatingChange(ratingValue) // If there's a parent callback, call it
+      onRatingChange(ratingValue)
     }
   }
 
@@ -18,7 +21,7 @@ export default function StarRating({ totalStars = 5, onRatingChange }) {
         return (
           <Star
             key={starValue}
-            filled={starValue <= rating}
+            filled={starValue <= userRating ? 'filled' : ''}
             onClick={() => handleStarClick(starValue)}
           />
         )
@@ -27,7 +30,6 @@ export default function StarRating({ totalStars = 5, onRatingChange }) {
   )
 }
 
-// Individual star component
 const Star = ({ filled, onClick }) => {
   return (
     <span className={`star ${filled ? 'filled' : ''}`} onClick={onClick}>
