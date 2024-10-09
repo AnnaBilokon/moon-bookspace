@@ -6,9 +6,15 @@ import { Link } from 'react-router-dom'
 import addImageBtn from '../../images/add-icon.png'
 import arrowBack from '../../images/arrow-back.png'
 import arrowForward from '../../images/arrow-forward.png'
+import ModalBookInfo from '../ModalBookInfo/ModalBookInfo.jsx'
 
 export default function AddedBooks() {
-  const { myBooks, removeFromMyBooks } = useContext(BookContext)
+  const {
+    myBooks,
+    removeFromMyBooks,
+    handleAddedBookClick,
+    selectedAddedBook,
+  } = useContext(BookContext)
   const scrollContainerRef = useRef(null)
 
   const scrollLeft = () => {
@@ -60,6 +66,7 @@ export default function AddedBooks() {
                     }
                     alt={book.title}
                     className="my-book-image"
+                    onClick={() => handleAddedBookClick(book)}
                   />
                   <h3 className="my-book-title">{book.title}</h3>
                   <p className="my-book-authors">
@@ -82,6 +89,7 @@ export default function AddedBooks() {
           <img src={arrowForward} alt="arrow-forward" />
         </button>
       </div>
+      <ModalBookInfo book={selectedAddedBook} />
     </>
   )
 }
