@@ -1,20 +1,126 @@
 .modal-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(27, 31, 36, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Make sure it's above other content */
+}
+
+.modal-content {
+  width: 50%;
+  height: fit-content;
+  background: #353B49;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.modal-info-section {
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	z-index: 1000; /* Make sure it's above other content */
-  }
-  
-  .modal-content {
-	background: white;
-	padding: 20px;
-	border-radius: 5px;
+	gap: 100px;
+	margin-top: 50px;
+}
+.modal-book-image img{
+	width: 140px;
+	height: 200px;
+	margin-top: 20px;
+	border: 2px solid #C2C2FE;
+	box-shadow: 0 3px 10px rgba(194, 194, 256, 0.4);
+}
+.modal-book-titles {
+	text-align: start;
+}
+
+.title-style {
+	color: #697AD1;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.modal-book-titles {
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.modal-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: start;
+	margin: 50px 0 50px 100px;
+}
+.modal-label{
+	color: #697AD1;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+	margin-left: 20px;
+}
+.modal-input {
+	width: 200px;
+	height: 40px;
+	border: 1px solid #697AD1;
+	border-radius: 6px;
+	background-color: #5F6470;
+	margin:10px 0 10px 20px;
+	color: white;
+}
+
+.rating {
+	display: flex;
+	justify-content: flex-start;
+}
+.modal-textarea {
 	width: 400px;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
+	height: 100px;
+	border: 1px solid #697AD1;
+	border-radius: 6px;
+	background-color: #5F6470;
+	margin:20px 0 0 20px;
+	color: white;
+}
+.modal-label-textarea {
+	text-align: start;
+	color: #697AD1;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+}
+.button-container {
+	display: flex;
+	justify-content: center;
+	margin: 20px auto;
+}
+
+.cancel-btn {
+	width: 200px;
+	height: 40px;
+	border: 1px solid #697AD1;
+	border-radius: 6px;
+	background-color: #353B49;
+	margin:10px 0 10px 20px;
+	color: white;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+
+.save-btn {
+	width: 200px;
+	height: 40px;
+	border: 1px solid #697AD1;
+	border-radius: 6px;
+	background-color: #697AD1;
+	margin:10px 0 10px 20px;
+	color: white;
+	font-size: 16px;
+	font-weight: 500;
+}
