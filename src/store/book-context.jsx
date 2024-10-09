@@ -10,13 +10,14 @@ export default function BookContextProvider({ children }) {
   const [customBookChallenge, setCustomBookChallenge] = useState('')
   const [submittedValue, setSubmittedValue] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedAddedBook, setSelectedAddedBook] = useState(null)
+  const [modalData, setModalData] = useState(null)
 
   const addToMyBooks = (book) => {
     if (!book || !book.id) {
       console.error('Invalid book or missing id:', book)
       return null
     }
-
     setMyBooks((prevBooks) => {
       const isBookAlreadyAdded = prevBooks.some((b) => b.id === book.id)
 
@@ -24,15 +25,16 @@ export default function BookContextProvider({ children }) {
         console.warn(`Book with id ${book.id} is already in My Books.`)
         return prevBooks
       }
-      const updatedBooks = [...prevBooks, book]
+      const updatedBooks = [book, ...prevBooks]
       localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
-      console.log('updated books', myBooks)
 
       return updatedBooks
     })
 
+    console.log('MY BOOKS', myBooks)
+
     setNotification(`Added "${book.title}" to My Books!`)
-    setIsModalOpen(true)
+    setSelectedAddedBook(book)
 
     setTimeout(() => {
       setNotification('')
@@ -44,12 +46,12 @@ export default function BookContextProvider({ children }) {
       console.error('No bookId provided for removal')
       return
     }
-
     setMyBooks((prevBooks) => {
       const updatedBooks = prevBooks.filter((book) => book.id !== bookId)
       localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
       return updatedBooks
     })
+    setModalData()
   }
 
   const handleCustomInputChange = (e) => {
@@ -73,6 +75,23 @@ export default function BookContextProvider({ children }) {
       setSubmittedValue(valueToSubmit)
       localStorage.setItem('numberOfBooksChallenge', valueToSubmit)
     }
+  }
+
+  const handleAddedBookClick = (book) => {
+    const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || []
+
+    const savedBookData = savedBooks.find(
+      (savedBook) => savedBook.id === book.id,
+    )
+
+    setModalData({
+      ...book,
+      rating: savedBookData?.userRating || '',
+      review: savedBookData?.review || '',
+      readDate: savedBookData?.readDate || '',
+    })
+    setSelectedAddedBook(savedBookData)
+    setIsModalOpen(true)
   }
 
   const handleModalSubmit = (details) => {
@@ -112,6 +131,9 @@ export default function BookContextProvider({ children }) {
         setIsModalOpen,
         handleModalSubmit,
         isModalOpen,
+        selectedAddedBook,
+        handleAddedBookClick,
+        modalData,
       }}
     >
       {children}
