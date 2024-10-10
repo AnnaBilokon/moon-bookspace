@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Item.css'
-import ModalBookInfo from '../ModalBookInfo/ModalBookInfo'
+import { BookContext } from '../../store/book-context'
+import ModalSearchBookInfo from '../ModalSearchBookInfo/ModalSearchBookInfo'
 
 export default function Item({ book, addToMyBooks }) {
+  const { handleFoundBookClick, isSearchModalOpen } = useContext(BookContext)
   const { title, authors, imageLinks } = book.volumeInfo
   console.log('Book object:', { id: book.id, ...book.volumeInfo })
 
@@ -12,7 +14,12 @@ export default function Item({ book, addToMyBooks }) {
         <h3 className="book-title">{title}</h3>
         {authors && <p className="book-authors">{authors.join(', ')}</p>}
         {imageLinks?.thumbnail && (
-          <img src={imageLinks.thumbnail} alt={title} className="book-image" />
+          <img
+            src={imageLinks.thumbnail}
+            alt={title}
+            className="book-image"
+            onClick={() => handleFoundBookClick(book)}
+          />
         )}
         <button
           className="add-button"
@@ -21,7 +28,7 @@ export default function Item({ book, addToMyBooks }) {
           Add to My Books
         </button>
       </li>
-      <ModalBookInfo />
+      {isSearchModalOpen && <ModalSearchBookInfo />}
     </div>
   )
 }
