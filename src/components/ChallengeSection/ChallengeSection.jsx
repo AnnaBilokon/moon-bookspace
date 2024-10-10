@@ -21,7 +21,8 @@ export default function ChallengeSection() {
       </div>
       <div className="results-container">
         <p className="results-title">
-          {bookCount} 0f {submittedValue} books
+          <span className="book-count">{bookCount} </span>of {submittedValue}{' '}
+          books
         </p>
         <p className="results-title">
           Still {submittedValue - bookCount} books left

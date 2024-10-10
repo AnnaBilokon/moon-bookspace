@@ -13,27 +13,32 @@ margin: 50px 0 100px 0;
 
 .challenge-title h1{
 	font-family: "Tenor Sans", sans-serif;
-	width: 20%;
+	text-align: start;
 	height: fit-content;
 	color: white;
-	font-size: 44px;
+	font-size: 48px;
 	font-weight: 500;
 }
 
 .challenge-title h2{
-	width: 70%;
 	font-family: "Poppins", sans-serif;
 	color: white;
 	font-size: 24px;
 	font-weight: 500;
 	margin: 0;
+	text-align: start;
 	
+}
+.chart-position {
+	width: 33.3%;
+	margin: 20px 100px;
 }
 
 .results-container {
-	width: 33.3%;;
+	width: 33.3%;
 	height: fit-content;
-	margin: 20px 180px 20px 0px;
+	padding-left: 10px;
+	margin: 20px 160px 20px 0px;
 	}
 	
 .results-title {
@@ -41,7 +46,7 @@ margin: 50px 0 100px 0;
 		font-size: 28px;
 		font-weight: 500;
 		color: white;
-		text-align: center;
+		text-align: start;
 		margin: 20px 0 20px 0;
 	}
 .results-motivation {
@@ -49,10 +54,12 @@ margin: 50px 0 100px 0;
 	font-size: 32px;
 	font-weight: 500;
 	color: #5452D1;
-	text-align: center;
+	text-align: start;
 	margin: 20px 0 20px 0;
 }
-.chart-position {
-	width: 260px;
-	margin: 0px 100px;
+.book-count {
+	font-family: 'Poppins', sans-serif;
+	font-size: 54px;
+	font-weight: 500;
+	color: #5452D1;
 }
