@@ -14,6 +14,7 @@ export default function ModalBookInfo() {
   const [review, setReview] = useState('')
   const [readDate, setReadDate] = useState('')
   const [userRating, setUserRating] = useState(0)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
     if (modalData) {
@@ -59,11 +60,22 @@ export default function ModalBookInfo() {
     setIsModalOpen(false)
   }
 
+  const description = modalData.description || ''
+  const maxLength = 200
+  const displayedDescription = isExpanded
+    ? description
+    : description.slice(0, maxLength) +
+      (description.length > maxLength ? '...' : '')
+
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded)
+  }
+
   return (
     <>
       <div className="modal-overlay">
         <div className="modal-content">
-          <h2>Enter Book Details</h2>
+          <h2>Edit Book details</h2>
           <div className="modal-info-section">
             <div className="modal-book-image">
               <img
@@ -92,6 +104,12 @@ export default function ModalBookInfo() {
                 {modalData.publishedDate}
               </p>
             </div>
+          </div>
+          <div className="description-section">
+            <p>{displayedDescription}</p>
+            <button className="expand-button" onClick={toggleExpanded}>
+              {isExpanded ? 'Show Less' : 'Show More'}
+            </button>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="modal-form">
