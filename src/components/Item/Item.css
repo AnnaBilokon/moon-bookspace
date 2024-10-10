@@ -17,6 +17,7 @@
 	max-width: 100%;
 	height: 240px;
 	margin-bottom: 10px;
+	cursor: pointer;
   }
 
   .book-title {
