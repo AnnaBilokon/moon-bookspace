@@ -12,6 +12,8 @@ export default function BookContextProvider({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedAddedBook, setSelectedAddedBook] = useState(null)
   const [modalData, setModalData] = useState(null)
+  const [modalSearchData, setModalSearchData] = useState(null)
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
 
   const addToMyBooks = (book) => {
     if (!book || !book.id) {
@@ -94,6 +96,21 @@ export default function BookContextProvider({ children }) {
     setIsModalOpen(true)
   }
 
+  const handleFoundBookClick = (book) => {
+    const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || []
+
+    const savedBookData = savedBooks.find(
+      (savedBook) => savedBook.id === book.id,
+    )
+
+    setModalSearchData({
+      ...book.volumeInfo,
+      id: book.id,
+      savedBookData,
+    })
+    setIsSearchModalOpen(true)
+  }
+
   const handleModalSubmit = (details) => {
     console.log('Book details submitted:', details)
   }
@@ -134,6 +151,10 @@ export default function BookContextProvider({ children }) {
         selectedAddedBook,
         handleAddedBookClick,
         modalData,
+        handleFoundBookClick,
+        modalSearchData,
+        isSearchModalOpen,
+        setIsSearchModalOpen,
       }}
     >
       {children}
