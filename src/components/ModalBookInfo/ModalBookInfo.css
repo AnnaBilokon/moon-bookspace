@@ -13,12 +13,28 @@
 
 .modal-content {
   width: 50%;
-  height: fit-content;
+  max-height: 100%; 
   background: #353B49;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden; 
+  overflow-y: scroll;
 }
+.modal-content h2 {
+	color: white;
+}
+
+.modal-content::-webkit-scrollbar {
+	display: none; /* Hides the scrollbar */
+  }
+  
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .modal-content {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+  }
+
 .modal-info-section {
 	display: flex;
 	justify-content: center;
@@ -124,3 +140,41 @@
 	font-size: 16px;
 	font-weight: 500;
 }
+
+.expandable-text {
+	position: relative;
+	overflow: hidden;
+	max-height: 5em; /* Adjust height based on the text block you want to show */
+	transition: max-height 0.3s ease;
+  }
+  
+  .expandable-text p {
+	margin: 0;
+  }
+  
+  .expandable-text.expanded {
+	max-height: none; /* Removes the height restriction when expanded */
+  }
+  
+  .expand-button {
+	background-color: transparent;
+	border: none;
+	color: #B26C96;
+	cursor: pointer;
+	font-size: 1em;
+	margin-top: 0.5em;
+  }
+  
+  .expand-button:hover {
+	text-decoration: underline;
+  }
+
+  .description-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: 50px 100px;
+	color: white;
+  }
+  
