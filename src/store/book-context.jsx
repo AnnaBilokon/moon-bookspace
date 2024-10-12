@@ -14,6 +14,8 @@ export default function BookContextProvider({ children }) {
   const [modalData, setModalData] = useState(null)
   const [modalSearchData, setModalSearchData] = useState(null)
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
+  const [combinedBookData, setCombinedBookData] = useState([])
+  const [favoriteBooks, setFavoriteBooks] = useState([])
 
   const addToMyBooks = (book) => {
     if (!book || !book.id) {
@@ -81,7 +83,6 @@ export default function BookContextProvider({ children }) {
 
   const handleAddedBookClick = (book) => {
     const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || []
-
     const savedBookData = savedBooks.find(
       (savedBook) => savedBook.id === book.id,
     )
@@ -91,6 +92,7 @@ export default function BookContextProvider({ children }) {
       rating: savedBookData?.userRating || '',
       review: savedBookData?.review || '',
       readDate: savedBookData?.readDate || '',
+      genre: savedBookData?.selectedGenre || '',
     })
     setSelectedAddedBook(savedBookData)
     setIsModalOpen(true)
@@ -113,9 +115,47 @@ export default function BookContextProvider({ children }) {
 
   const handleModalSubmit = (details) => {
     console.log('Book details submitted:', details)
+    setModalData((prevData) => ({
+      ...prevData,
+      rating: details.userRating,
+      readDate: details.readDate,
+      id: prevData.id,
+    }))
+  }
+  const bookCount = myBooks.length
+
+  const getCombinedBookData = (myBooks, modalData) => {
+    if (!modalData) return myBooks
+
+    return myBooks.map((book) => {
+      if (book.id === modalData.id) {
+        return {
+          ...book,
+          userRating: modalData.rating || book.userRating,
+          readDate: modalData.readDate || book.readDate,
+        }
+      }
+      return book
+    })
   }
 
-  const bookCount = myBooks.length
+  useEffect(() => {
+    const savedFavorites =
+      JSON.parse(localStorage.getItem('favoriteBooks')) || []
+    setFavoriteBooks(savedFavorites)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
+  }, [favoriteBooks])
+
+  const toggleFavoriteBook = (bookId) => {
+    setFavoriteBooks((prevFavorites) =>
+      prevFavorites.includes(bookId)
+        ? prevFavorites.filter((id) => id !== bookId)
+        : [...prevFavorites, bookId],
+    )
+  }
 
   useEffect(() => {
     const savedBooks = localStorage.getItem('myBooks')
@@ -130,6 +170,12 @@ export default function BookContextProvider({ children }) {
       setSubmittedValue(savedNumber)
     }
   }, [])
+
+  useEffect(() => {
+    const combinedData = getCombinedBookData(myBooks, modalData)
+    setCombinedBookData(combinedData)
+    console.log('CONBINED BOOK DATA', combinedBookData)
+  }, [myBooks, modalData])
 
   return (
     <BookContext.Provider
@@ -155,6 +201,10 @@ export default function BookContextProvider({ children }) {
         modalSearchData,
         isSearchModalOpen,
         setIsSearchModalOpen,
+        getCombinedBookData,
+        combinedBookData,
+        toggleFavoriteBook,
+        favoriteBooks,
       }}
     >
       {children}
