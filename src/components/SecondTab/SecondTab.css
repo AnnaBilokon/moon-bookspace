@@ -1,0 +1,59 @@
+.input-month {
+	width: 250px;
+	height: 40px;
+	border: 1px solid #697AD1;
+	border-radius: 6px;
+	background-color: #5F6470;
+	margin:40px 0 10px 14px;
+	text-align: center;
+	color: white;
+}
+
+.month-info-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 80px;
+}
+
+.month-info-boxes {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	color: white;
+	margin: 0 auto;
+}
+.number-of-books {
+	width: 300px;
+	height: 140px;
+	border: 1px solid #697AD1;
+	margin-bottom: 30px;
+}
+.number-of-pages {
+	width: 300px;
+	height: 140px;
+	border: 1px solid #697AD1;
+	margin-bottom: 30px;
+}
+
+.month-best-book {
+	width: 50%;
+}
+
+.best-book-image {
+	min-width: 260px;
+	min-height: 300px;
+	border: 1px solid #5F6470;
+}
+.month-book-all{
+	margin: 20px auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	row-gap: 100px;
+}
+.secondtab-my-book-image {
+	width: 160px;
+	height: 240px;
+	border: 2px solid #C2C2FE;
+	cursor: pointer;
+}
