@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import BookContextProvider from './store/book-context.jsx'
 import SearchPage from './pages/SearchPage.jsx';
 import StartPage from './pages/StartPage.jsx';
+import MyChallengePage from './pages/MyChallengePage.jsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 		  <Route path='/' element={<StartPage/>}/>
 		  <Route path='/home' element={<Home/>}/>
 		  <Route path='/search' element={<BookContextProvider> <SearchPage/> </BookContextProvider>}/>
+		  <Route path='/mychallenge' element={<BookContextProvider> <MyChallengePage/></BookContextProvider>}/>
 		</Routes>
 		</Router>
 
