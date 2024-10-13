@@ -24,7 +24,7 @@
   background-color: #353B49;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-width: 180px;
+  min-width: 200px;
   min-height: 340px;
   padding: 20px;
   text-align: center;
@@ -41,7 +41,7 @@
 	height: 35px;
 	background-color:  #5452D1;
 	border: 1px solid #5452D1;
-	border-radius: 20px;
+	border-radius: 10px;
 	color: white;
 	cursor: pointer;
 }
@@ -79,7 +79,7 @@
 	height: 35px;
 	background-color:  #5452D1;
 	border: 1px solid #5452D1;
-	border-radius: 20px;
+	border-radius: 10px;
 	color: white;
 	cursor: pointer;
 	margin: 150px auto 10px;

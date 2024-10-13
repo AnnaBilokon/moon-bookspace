@@ -69,9 +69,7 @@ export default function AddedBooks() {
                     onClick={() => handleAddedBookClick(book)}
                   />
                   <h3 className="my-book-title">{book.title}</h3>
-                  <p className="my-book-authors">
-                    Author: {book.authors?.join(', ')}
-                  </p>
+                  <p className="my-book-authors">{book.authors?.join(', ')}</p>
                   <button
                     className="delete-btn"
                     onClick={() => removeFromMyBooks(book.id)}
