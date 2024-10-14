@@ -25,6 +25,8 @@ export default function SecondTab() {
     setSelectedMonth(e.target.value)
   }
 
+  const amountReadBooks = filteredBooks.length
+
   return (
     <>
       <div>
@@ -47,7 +49,10 @@ export default function SecondTab() {
       </div>
       <div className="month-info-container">
         <div className="month-info-boxes">
-          <div className="number-of-books">Number of books</div>
+          <div className="number-of-books">
+            <p>Number of books</p>
+            <p className="number-read-books">{amountReadBooks}</p>
+          </div>
           <div className="number-of-pages">pages</div>
         </div>
         <div className="month-best-book">
