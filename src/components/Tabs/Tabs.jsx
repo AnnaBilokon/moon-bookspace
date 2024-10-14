@@ -1,14 +1,18 @@
 import React, { useContext, useState } from 'react'
-import './Tabs.css' // Optional: add some CSS for styling
+import './Tabs.css'
 import { BookContext } from '../../store/book-context'
 import StarRating from '../StarRating/StarRating'
+import ModalBookInfo from '../ModalBookInfo/ModalBookInfo'
+import SecondTab from '../SecondTab/SecondTab'
 
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState('tab1')
+
   const {
     handleAddedBookClick,
     removeFromMyBooks,
     combinedBookData,
+    selectedAddedBook,
   } = useContext(BookContext)
 
   const handleTabClick = (tab) => {
@@ -50,10 +54,9 @@ export default function Tabs() {
                         }
                         alt={book.title}
                         className="tabs-my-book-image"
-                        onClick={() => handleAddedBookClick(book)}
                       />
                       <div className="title-author-container">
-                        <h3 className="my-book-title">{book.title}</h3>
+                        <h3 className="tabs-my-book-title">{book.title}</h3>
                         <p className="tabs-my-book-authors">
                           {book.authors?.join(', ')}
                         </p>
@@ -64,7 +67,7 @@ export default function Tabs() {
                         className="rating-position"
                       />
                       <div className="my-book-readDate-text">
-                        {book.readDate}
+                        {book.readDate ? book.readDate : 'no date yet'}
                       </div>
                       {/* <div
                 className="favorite-icon"
@@ -76,12 +79,20 @@ export default function Tabs() {
                   <FaRegHeart /> // Outlined heart for non-favorite
                 )}
               </div> */}
-                      <button
-                        className="tabs-delete-btn"
-                        onClick={() => removeFromMyBooks(book.id)}
-                      >
-                        Delete
-                      </button>
+                      <div>
+                        <button
+                          className="tabs-delete-btn"
+                          onClick={() => removeFromMyBooks(book.id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="tabs-edit-btn"
+                          onClick={() => handleAddedBookClick(book)}
+                        >
+                          Edit
+                        </button>
+                      </div>
                     </div>
                   )
                 })
@@ -93,11 +104,11 @@ export default function Tabs() {
         )}
         {activeTab === 'tab2' && (
           <div>
-            <h2>Content for Tab 2</h2>
-            <p>This is the content for the second tab.</p>
+            <SecondTab />
           </div>
         )}
       </div>
+      <ModalBookInfo book={selectedAddedBook} />
     </div>
   )
 }
