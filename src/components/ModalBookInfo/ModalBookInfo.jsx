@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import './ModalBookInfo.css'
 import { BookContext } from '../../store/book-context'
 import StarRating from '../StarRating/StarRating'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import genres from '../../genresData.js'
 
 export default function ModalBookInfo() {
   const {
@@ -9,11 +11,15 @@ export default function ModalBookInfo() {
     handleModalSubmit,
     isModalOpen,
     modalData,
+    setMyBooks,
+    toggleFavoriteBook,
+    favoriteBooks,
   } = useContext(BookContext)
 
   const [review, setReview] = useState('')
   const [readDate, setReadDate] = useState('')
   const [userRating, setUserRating] = useState(0)
+  const [selectedGenre, setSelectedGenre] = useState('')
   const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
@@ -21,6 +27,7 @@ export default function ModalBookInfo() {
       setReview(modalData.review || '')
       setReadDate(modalData.readDate || '')
       setUserRating(modalData.rating || 0)
+      setSelectedGenre(modalData.selectedGenre || '')
     }
   }, [modalData])
 
@@ -28,7 +35,7 @@ export default function ModalBookInfo() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    handleModalSubmit({ userRating, review, readDate })
+    handleModalSubmit({ userRating, review, readDate, selectedGenre })
     setIsModalOpen(false)
   }
 
@@ -36,6 +43,10 @@ export default function ModalBookInfo() {
 
   const handleRatingChange = (rating) => {
     setUserRating(rating)
+  }
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value)
+    console.log('Selected Genre:', e.target.value)
   }
 
   const onSave = (e) => {
@@ -50,13 +61,14 @@ export default function ModalBookInfo() {
           userRating,
           review,
           readDate,
+          selectedGenre,
+          favoriteBooks,
         }
       }
       return savedBook
     })
-
     localStorage.setItem('myBooks', JSON.stringify(updatedBooks))
-
+    setMyBooks(updatedBooks)
     setIsModalOpen(false)
   }
 
@@ -92,10 +104,6 @@ export default function ModalBookInfo() {
                 {modalData.authors?.join(', ')}
               </p>
               <p>
-                <span className="title-style">Genre:</span>{' '}
-                {modalData.categories}
-              </p>
-              <p>
                 <span className="title-style">Pages:</span>{' '}
                 {modalData.pageCount}
               </p>
@@ -103,6 +111,16 @@ export default function ModalBookInfo() {
                 <span className="title-style">Publishing Date:</span>{' '}
                 {modalData.publishedDate}
               </p>
+              <div
+                className="favorite-icon"
+                onClick={() => toggleFavoriteBook(modalData.id)}
+              >
+                {favoriteBooks.includes(modalData.id) ? (
+                  <FaHeart style={{ color: 'red' }} /> // Filled heart for favorite
+                ) : (
+                  <FaRegHeart /> // Outlined heart for non-favorite
+                )}
+              </div>
             </div>
           </div>
           <div className="description-section">
@@ -121,6 +139,24 @@ export default function ModalBookInfo() {
                   setUserRating={setUserRating}
                   onRatingChange={handleRatingChange}
                 />
+              </div>
+              <div>
+                <label className="modal-label">Genre:</label>
+                <select
+                  className="modal-input-genre"
+                  id="genre"
+                  value={selectedGenre}
+                  onChange={(e) => handleGenreChange(e)}
+                >
+                  <option value="" disabled>
+                    -- Choose a genre --
+                  </option>
+                  {genres.map((genre, index) => (
+                    <option key={index} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label className="modal-label">Read:</label>
