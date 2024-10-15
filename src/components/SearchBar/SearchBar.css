@@ -54,7 +54,7 @@ ul {
 	transform: translateY(-50%);
 	border: 1px solid #5452D1;
 	border-radius: 40px;
-	background: none;
+	background: #5F6470;
 	cursor: pointer;
 	color: white; /* Blue icon color */
 	font-size: 14px;
