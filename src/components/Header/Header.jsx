@@ -43,19 +43,19 @@ export default function Header() {
           </Link>
           {menu === 'shop' ? <hr /> : <></>}
         </li>
-        <li
+        {/* <li
           onClick={() => {
             setMenu('categories')
           }}
         >
           <Link
-            to="/categories"
+            to="/mychallenge"
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
-            Genres
+            My Challenge
           </Link>{' '}
-          {menu === 'categories' ? <hr /> : <></>}
-        </li>
+          {menu === 'mychallenge' ? <hr /> : <></>}
+        </li> */}
         <li
           onClick={() => {
             setMenu('events')
@@ -65,18 +65,29 @@ export default function Header() {
             to="/events"
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
-            Favourites
+            Genres
           </Link>{' '}
           {menu === 'events' ? <hr /> : <></>}
         </li>
+
+        <li
+          onClick={() => {
+            setMenu('favourites')
+          }}
+        >
+          <Link
+            to="/favourites"
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            Favourites
+          </Link>{' '}
+          {menu === 'favourites' ? <hr /> : <></>}
+        </li>
       </ul>
       <i class="fas fa-coffee"></i>
-      <div className="nav_login_cart">
+      <div className="nav_account">
         <Link to="/login">
-          <p className="login-btn"> Log In</p>
-        </Link>
-        <Link to="/login">
-          <button className="signup-btn"> Sign Up</button>
+          <button className="account-button"></button>
         </Link>
       </div>
     </div>
