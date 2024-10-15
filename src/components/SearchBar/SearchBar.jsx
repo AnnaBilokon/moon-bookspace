@@ -43,6 +43,7 @@ export default function SearchBar() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search for books..."
+            autoComplete="off"
             required
           />
           <button type="submit" id="search-button">
