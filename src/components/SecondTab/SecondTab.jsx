@@ -60,7 +60,7 @@ export default function SecondTab() {
         </div>
       </div>
       <div>
-        <h3>
+        <h3 className="list-books-title">
           Books read in{' '}
           {selectedMonth && months.find((m) => m.value === selectedMonth)?.name}
         </h3>
