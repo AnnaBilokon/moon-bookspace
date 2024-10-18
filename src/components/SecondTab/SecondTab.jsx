@@ -37,9 +37,9 @@ export default function SecondTab() {
           value={selectedMonth}
           onChange={(e) => handleMonthChange(e)}
         >
-          <option value="" disabled>
+          {/* <option value="" disabled>
             -- Choose a genre --
-          </option>
+          </option> */}
           {months.map((month) => (
             <option key={month.value} value={month.value}>
               {month.name}
