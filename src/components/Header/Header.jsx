@@ -62,26 +62,26 @@ export default function Header() {
           }}
         >
           <Link
-            to="/events"
+            to="/genres"
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             Genres
           </Link>{' '}
-          {menu === 'events' ? <hr /> : <></>}
+          {menu === 'genres' ? <hr /> : <></>}
         </li>
 
         <li
           onClick={() => {
-            setMenu('favourites')
+            setMenu('favorites')
           }}
         >
           <Link
-            to="/favourites"
+            to="/favorites"
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
-            Favourites
+            Favorites
           </Link>{' '}
-          {menu === 'favourites' ? <hr /> : <></>}
+          {menu === 'favorites' ? <hr /> : <></>}
         </li>
       </ul>
       <i class="fas fa-coffee"></i>
