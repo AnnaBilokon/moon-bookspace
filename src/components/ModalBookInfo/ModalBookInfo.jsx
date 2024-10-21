@@ -116,9 +116,9 @@ export default function ModalBookInfo() {
                 onClick={() => toggleFavoriteBook(modalData.id)}
               >
                 {favoriteBooks.includes(modalData.id) ? (
-                  <FaHeart style={{ color: 'red' }} /> // Filled heart for favorite
+                  <FaHeart style={{ color: 'red' }} />
                 ) : (
-                  <FaRegHeart /> // Outlined heart for non-favorite
+                  <FaRegHeart />
                 )}
               </div>
             </div>
