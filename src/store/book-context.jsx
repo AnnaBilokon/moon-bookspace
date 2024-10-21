@@ -145,16 +145,29 @@ export default function BookContextProvider({ children }) {
     setFavoriteBooks(savedFavorites)
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
-  }, [favoriteBooks])
+  //   useEffect(() => {
+  //     localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
+  //   }, [favoriteBooks])
+
+  //   const toggleFavoriteBook = (bookId) => {
+  //     setFavoriteBooks((prevFavorites) =>
+  //       prevFavorites.includes(bookId)
+  //         ? prevFavorites.filter((id) => id !== bookId)
+  //         : [...prevFavorites, bookId],
+  //     )
+  //   }
 
   const toggleFavoriteBook = (bookId) => {
-    setFavoriteBooks((prevFavorites) =>
-      prevFavorites.includes(bookId)
+    setFavoriteBooks((prevFavorites) => {
+      const updatedFavorites = prevFavorites.includes(bookId)
         ? prevFavorites.filter((id) => id !== bookId)
-        : [...prevFavorites, bookId],
-    )
+        : [...prevFavorites, bookId]
+
+      // Save the updated favorites to localStorage
+      localStorage.setItem('favoriteBooks', JSON.stringify(updatedFavorites))
+
+      return updatedFavorites
+    })
   }
 
   useEffect(() => {
