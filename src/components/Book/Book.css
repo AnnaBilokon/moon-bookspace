@@ -1,0 +1,47 @@
+.current-book-page {
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+}
+.info-book-section {
+	display: flex;
+	justify-content: flex-start;
+	gap: 300px;
+	
+}
+.current-book-image img{
+	width: 180px;
+	height: 280px;
+	margin: 20px 0 0 140px;
+	border: 2px solid #C2C2FE;
+	box-shadow: 0 3px 10px rgba(194, 194, 256, 0.4);
+}
+.current-book-titles {
+	text-align: start;
+}
+.current-book-title-style {
+	color: white;
+	font-family: "Amatic SC", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 86px;
+}
+.current-book-author-name {
+	color: #80868F;
+	font-family: 'Poppins', sans-serif;
+	font-size: 32px;
+	font-weight: 400;
+	margin: 0 auto;
+	text-align: center;
+}
+.under-book-section {
+	margin: 10px 0 10px 140px;
+}
+.under-book-info-style {
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+	text-align: start;
+
+}
