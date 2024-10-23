@@ -2,13 +2,20 @@ import React, { useContext } from 'react'
 import './FirstTab.css'
 import { BookContext } from '../../store/book-context.jsx'
 import StarRating from '../StarRating/StarRating'
+import { useNavigate } from 'react-router-dom'
 
 export default function FirstTab() {
+  const navigate = useNavigate()
   const {
     combinedBookData,
     removeFromMyBooks,
     handleAddedBookClick,
   } = useContext(BookContext)
+
+  const handleOpenInfoClick = (bookId) => {
+    navigate(`/book/${bookId}`)
+  }
+
   return (
     <>
       <div className="my-books-list">
@@ -27,6 +34,7 @@ export default function FirstTab() {
                   }
                   alt={book.title}
                   className="tabs-my-book-image"
+                  onClick={() => handleOpenInfoClick(book.id)}
                 />
                 <div className="title-author-container">
                   <h3 className="tabs-my-book-title">{book.title}</h3>
