@@ -23,34 +23,52 @@
 	color: white;
 	margin: 0 auto;
 }
-.number-of-books {
+.info-box {
 	width: 300px;
 	height: 140px;
 	border: 1px solid #697AD1;
-	margin-bottom: 30px;
+	margin-bottom: 80px;
 }
 
-.number-read-books {
+.total-number {
 	font-family: 'Poppins', sans-serif;
-	font-size: 44px;
+	font-size: 40px;
 	color: #697AD1;
 	font-weight: 500;
 	text-align: center;
-}
-.number-of-pages {
-	width: 300px;
-	height: 140px;
-	border: 1px solid #697AD1;
-	margin-bottom: 30px;
+	margin-top: 0;
 }
 
 .month-best-book {
+	display: flex;
 	width: 50%;
+	flex-direction: column;
+
+}
+.best-book-image {
+	width: 170px;
+	height: 260px;
+	margin: 0 auto;
+
+}
+
+.select-months-book {
+	width: fit-content;
+	height: 40px;
+	padding: 3px 5px;
+	border: 1px solid #697AD1;
+	border-radius: 6px;
+	background-color: #C2C2FE;
+	margin:40px 0 10px 14px;
+	text-align: center;
+	color: black;
+	margin: 20px auto;
+
 }
 
 .best-book-image {
-	min-width: 260px;
-	min-height: 300px;
+	min-width: 140px;
+	min-height: 200px;
 	border: 1px solid #5F6470;
 }
 .month-book-all{
@@ -64,6 +82,12 @@
 	height: 240px;
 	border: 2px solid #C2C2FE;
 	cursor: pointer;
+}
+.best-book-section-title {
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+	margin-top: 0;
 }
 
 .list-books-title {
