@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { BookContext } from '../../store/book-context'
 import './Book.css'
@@ -8,11 +8,23 @@ import StarRating from '../StarRating/StarRating'
 export default function Book() {
   const { id } = useParams()
   const { myBooks } = useContext(BookContext)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const book = myBooks.find((book) => book.id === id)
 
   if (!book) {
     return <p>Book not found</p>
+  }
+
+  const description = book.description || ''
+  const maxLength = 200
+  const displayedDescription = isExpanded
+    ? description
+    : description.slice(0, maxLength) +
+      (description.length > maxLength ? '...' : '')
+
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded)
   }
 
   return (
@@ -53,6 +65,15 @@ export default function Book() {
           </p>
           <p className="under-book-info-style">Genre: {book.selectedGenre}</p>
           <p className="under-book-info-style">Read: {book.readDate}</p>
+        </div>
+        <div className="synopsis-review-section">
+          <div className="synopsis">
+            <p>{displayedDescription}</p>
+            <button className="expand-button" onClick={toggleExpanded}>
+              {isExpanded ? 'Show Less' : 'Show More'}
+            </button>
+          </div>
+          <div className="review">Review</div>
         </div>
       </div>
     </>
