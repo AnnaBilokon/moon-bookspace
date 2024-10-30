@@ -45,3 +45,22 @@
 	text-align: start;
 
 }
+.synopsis-review-section {
+	display: flex;
+	justify-content: space-between;
+}
+.synopsis {
+	width: 50%;
+	color: white;
+	text-align: justify;
+	padding: 20px;
+}
+
+.review {
+	background-color: #5F6470;
+	width: 50%;
+	color: white;
+	text-align: justify;
+	padding: 20px;
+	margin: 20px;
+}
